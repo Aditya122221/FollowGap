@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -9,6 +9,19 @@ function App() {
   const [error, setError] = useState(null)
   const [status, setStatus] = useState('')
   const [debugInfo, setDebugInfo] = useState(null)
+  const [clickedProfiles, setClickedProfiles] = useState(new Set())
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'default'
+  })
+
+  // Apply theme to container
+  useEffect(() => {
+    const container = document.querySelector('.app-container')
+    if (container) {
+      container.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)
+    }
+  }, [theme])
 
   // Helper function to extract username from an item
   const extractUsernameFromItem = (item) => {
@@ -244,10 +257,30 @@ function App() {
     setDebugInfo(null)
   }
 
+  const themes = [
+    { id: 'default', name: 'Default' },
+    { id: 'dark-blue', name: 'Dark Blue' },
+    { id: 'teal', name: 'Teal' },
+    { id: 'charcoal', name: 'Charcoal' }
+  ]
+
   return (
-    <div className="app-container">
+    <div className="app-container" data-theme={theme}>
       <header className="app-header">
-        <h1>Instagram Follower Checker</h1>
+        <div className="theme-switcher">
+          {themes.map((t) => (
+            <button
+              key={t.id}
+              className={`theme-button ${theme === t.id ? 'active' : ''}`}
+              data-theme={t.id}
+              onClick={() => setTheme(t.id)}
+              title={t.name}
+              aria-label={`Switch to ${t.name} theme`}
+            />
+          ))}
+        </div>
+        <img src="/logo.png" alt="FollowGap Logo" className="logo" />
+        <h1>FollowGap</h1>
         <p className="subtitle">Find accounts you follow who don't follow you back</p>
       </header>
 
@@ -344,7 +377,18 @@ function App() {
                     href={`https://www.instagram.com/${username}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="account-link"
+                    className={`account-link ${clickedProfiles.has(username) ? 'clicked' : ''}`}
+                    onClick={(e) => {
+                      setClickedProfiles(prev => {
+                        const newSet = new Set(prev)
+                        if (newSet.has(username)) {
+                          newSet.delete(username)
+                        } else {
+                          newSet.add(username)
+                        }
+                        return newSet
+                      })
+                    }}
                   >
                     @{username}
                   </a>

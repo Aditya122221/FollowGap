@@ -1,28 +1,161 @@
+/* CSS Variables - Default Theme (Original Light Blue) */
+.app-container {
+  --bg-primary: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-heading: #1E3A8A;
+  --border-color: #E2E8F0;
+  --primary-color: #3B82F6;
+  --primary-hover: #1E3A8A;
+  --accent-color: #38BDF8;
+  --error-color: #f5576c;
+  --spinner-border: #E2E8F0;
+  --spinner-top: #3B82F6;
+  --shadow-primary: rgba(0, 0, 0, 0.08);
+  --shadow-blue: rgba(59, 130, 246, 0.4);
+}
+
+/* Theme 2: Dark Blue */
+.app-container[data-theme="dark-blue"] {
+  --bg-primary: #020617;
+  --bg-surface: #020617;
+  --bg-secondary: #020617;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-heading: #F8FAFC;
+  --border-color: #1E293B;
+  --primary-color: #2563EB;
+  --primary-hover: #1E40AF;
+  --accent-color: #22D3EE;
+  --error-color: #DC2626;
+  --spinner-border: #1E293B;
+  --spinner-top: #2563EB;
+  --shadow-primary: rgba(0, 0, 0, 0.3);
+  --shadow-blue: rgba(37, 99, 235, 0.4);
+}
+
+/* Theme 3: Teal/Emerald */
+.app-container[data-theme="teal"] {
+  --bg-primary: #F0FDFA;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #F0FDFA;
+  --text-primary: #134E4A;
+  --text-secondary: #134E4A;
+  --text-heading: #134E4A;
+  --border-color: #5EEAD4;
+  --primary-color: #0D9488;
+  --primary-hover: #0F766E;
+  --accent-color: #5EEAD4;
+  --error-color: #DC2626;
+  --spinner-border: #5EEAD4;
+  --spinner-top: #0D9488;
+  --shadow-primary: rgba(13, 148, 136, 0.1);
+  --shadow-blue: rgba(13, 148, 136, 0.4);
+}
+
+/* Theme 4: White/Charcoal/Blue */
+.app-container[data-theme="charcoal"] {
+  --bg-primary: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #FFFFFF;
+  --text-primary: #1F2937;
+  --text-secondary: #1F2937;
+  --text-heading: #111827;
+  --border-color: #E5E7EB;
+  --primary-color: #111827;
+  --primary-hover: #1F2937;
+  --accent-color: #3B82F6;
+  --error-color: #DC2626;
+  --spinner-border: #E5E7EB;
+  --spinner-top: #3B82F6;
+  --shadow-primary: rgba(0, 0, 0, 0.08);
+  --shadow-blue: rgba(59, 130, 246, 0.4);
+}
+
+/* Theme Switcher */
+.theme-switcher {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+.theme-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.theme-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px var(--shadow-primary);
+}
+
+.theme-button.active {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--primary-color);
+}
+
+/* Theme color indicators */
+.theme-button[data-theme="default"] {
+  background: linear-gradient(135deg, #F8FAFC 0%, #3B82F6 100%);
+}
+
+.theme-button[data-theme="dark-blue"] {
+  background: linear-gradient(135deg, #020617 0%, #2563EB 100%);
+}
+
+.theme-button[data-theme="teal"] {
+  background: linear-gradient(135deg, #F0FDFA 0%, #0D9488 100%);
+}
+
+.theme-button[data-theme="charcoal"] {
+  background: linear-gradient(135deg, #FFFFFF 0%, #111827 100%);
+}
+
+/* Base Styles using CSS Variables */
 .app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
 }
 
 .app-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: 1rem;
 }
 
 .app-header h1 {
   font-size: 2.5rem;
   margin: 0 0 0.5rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--text-heading);
 }
 
 .subtitle {
   font-size: 1.1rem;
-  opacity: 0.9;
+  color: var(--text-secondary);
   margin: 0;
+  opacity: 0.8;
 }
 
 .main-content {
@@ -42,23 +175,24 @@
 }
 
 .upload-box {
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-primary);
+  border: 1px solid var(--border-color);
 }
 
 .upload-box h2 {
   margin: 0 0 1rem 0;
   font-size: 1.3rem;
-  color: #667eea;
+  color: var(--text-heading);
 }
 
 .file-upload-label {
   display: inline-block;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -70,7 +204,8 @@
 
 .file-upload-label:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px var(--shadow-blue);
+  background: var(--primary-hover);
 }
 
 .file-upload-label:active {
@@ -79,14 +214,15 @@
 
 .help-text {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
   margin: 0.5rem 0 0 0;
+  opacity: 0.8;
 }
 
 .analyze-button {
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 8px;
@@ -98,7 +234,8 @@
 
 .analyze-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+  box-shadow: 0 6px 20px var(--shadow-blue);
+  background: var(--primary-hover);
 }
 
 .analyze-button:disabled {
@@ -107,21 +244,23 @@
 }
 
 .error-message {
-  background: #f5576c;
+  background: var(--error-color);
   color: white;
   padding: 1rem;
   border-radius: 8px;
   margin-top: 1rem;
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 .status-box {
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   padding: 1.5rem;
   border-radius: 12px;
   margin-top: 1rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-primary);
+  border: 1px solid var(--border-color);
 }
 
 .status-content {
@@ -133,8 +272,8 @@
 .spinner {
   width: 24px;
   height: 24px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #667eea;
+  border: 3px solid var(--spinner-border);
+  border-top: 3px solid var(--spinner-top);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   flex-shrink: 0;
@@ -148,7 +287,7 @@
 .status-text {
   margin: 0;
   font-size: 1rem;
-  color: #333;
+  color: var(--text-primary);
   flex: 1;
 }
 
@@ -165,16 +304,17 @@
 }
 
 .stat {
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-primary);
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
 .stat.highlight {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: var(--primary-color);
   color: white;
 }
 
@@ -192,17 +332,18 @@
 }
 
 .accounts-list {
-  background: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-primary);
+  border: 1px solid var(--border-color);
   margin-bottom: 2rem;
 }
 
 .accounts-list h2 {
   margin: 0 0 1.5rem 0;
-  color: #667eea;
+  color: var(--text-heading);
   font-size: 1.5rem;
 }
 
@@ -218,29 +359,39 @@
 .account-link {
   display: block;
   padding: 0.75rem 1rem;
-  background: #f5f5f5;
-  color: #667eea;
+  background: var(--bg-secondary);
+  color: var(--text-heading);
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.2s;
-  border: 2px solid transparent;
+  border: 1px solid var(--border-color);
   font-weight: 500;
 }
 
 .account-link:hover {
-  background: #667eea;
+  background: var(--primary-color);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-  border-color: #764ba2;
+  box-shadow: 0 4px 12px var(--shadow-blue);
+  border-color: var(--primary-color);
+}
+
+.account-link.clicked {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.account-link.clicked:hover {
+  background: var(--primary-color);
 }
 
 .reset-button {
   padding: 1rem 2rem;
   font-size: 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid white;
+  background: var(--bg-surface);
+  color: var(--text-heading);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
@@ -250,17 +401,19 @@
 }
 
 .reset-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--bg-secondary);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
 .app-footer {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
   font-size: 0.9rem;
-  opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 /* Scrollbar styling */
@@ -269,17 +422,17 @@
 }
 
 .accounts-grid::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--bg-secondary);
   border-radius: 4px;
 }
 
 .accounts-grid::-webkit-scrollbar-thumb {
-  background: #667eea;
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 .accounts-grid::-webkit-scrollbar-thumb:hover {
-  background: #764ba2;
+  background: var(--primary-hover);
 }
 
 /* Responsive design */
@@ -298,5 +451,11 @@
 
   .upload-box {
     padding: 1.5rem;
+  }
+
+  .theme-switcher {
+    position: static;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 }
