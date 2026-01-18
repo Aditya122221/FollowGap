@@ -167,7 +167,3 @@ If you encounter issues:
 2. **Multiple files**: If you have multiple followers files, select all of them at once
 3. **Browser console**: Open browser developer tools (F12) to see detailed error messages
 4. **File format**: Make sure you're uploading the JSON files directly from Instagram's download, not modified versions
-
-## License
-
-This project is private and not licensed for public use.
